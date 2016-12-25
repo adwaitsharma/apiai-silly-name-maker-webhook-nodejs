@@ -32,15 +32,16 @@ app.post('/', function (req, res) {
   console.log('Request headers: ' + JSON.stringify(req.headers));
   console.log('Request body: ' + JSON.stringify(req.body));
 
-  request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', function (error, response, body) {
+  // Make a silly name
+  function makeName (assistant) {
+
+      request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', function (error, response, body) {
     if (!error && response.statusCode == 200) {
       x = JSON.parse(body);
       x2 = x.message;
     }
   })
 
-  // Make a silly name
-  function makeName (assistant) {
     let number = assistant.getArgument(NUMBER_ARGUMENT);
     let color = assistant.getArgument(COLOR_ARGUMENT);
     assistant.tell('Alright, your silly name is ' +
