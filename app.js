@@ -16,6 +16,7 @@
 process.env.DEBUG = 'actions-on-google:*';
 let Assistant = require('actions-on-google').ApiAiAssistant;
 let express = require('express');
+let request = require('request');
 let bodyParser = require('body-parser');
 let x2 = "some joke";
 let app = express();
