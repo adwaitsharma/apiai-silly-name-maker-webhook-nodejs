@@ -18,7 +18,6 @@ let Assistant = require('actions-on-google').ApiAiAssistant;
 let express = require('express');
 let request = require('request');
 let bodyParser = require('body-parser');
-let x2 = "some joke";
 let app = express();
 app.use(bodyParser.json({type: 'application/json'}));
 
@@ -34,21 +33,17 @@ app.post('/', function (req, res) {
 
   // Make a silly name
   function makeName (assistant) {
-
-      request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', {'content-type': 'application/json'}, function (error, response, body) {
+    request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', {'content-type': 'application/json'}, function (error, response, body) {
     if (!error && response.statusCode == 200) {
-      x = JSON.parse(body);
-      x2 = x.message;
+      let x = JSON.parse(body);
+      let x2 = x.message;
+      let number = assistant.getArgument(NUMBER_ARGUMENT);
+      let color = assistant.getArgument(COLOR_ARGUMENT);
+      assistant.tell('Alright, your silly name is ' +
+      color + ' ' + x2 +'! I hope you like it. See you next time.');
     }
   })
-
-    let number = assistant.getArgument(NUMBER_ARGUMENT);
-    let color = assistant.getArgument(COLOR_ARGUMENT);
-    assistant.tell('Alright, your silly name is ' +
-      color + ' ' + x2 +
-      '! I hope you like it. See you next time.');
   }
-
   let actionMap = new Map();
   actionMap.set(NAME_ACTION, makeName);
 
