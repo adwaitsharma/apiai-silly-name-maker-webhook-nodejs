@@ -35,7 +35,7 @@ app.post('/', function (req, res) {
   // Make a silly name
   function makeName (assistant) {
 
-      request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', function (error, response, body) {
+      request('https://api.whatdoestrumpthink.com/api/v1/quotes/personalized?q=Adwait', {'content-type': 'application/json'}, function (error, response, body) {
     if (!error && response.statusCode == 200) {
       x = JSON.parse(body);
       x2 = x.message;
